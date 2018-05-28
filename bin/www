@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+const global = require('../app');
+const debug = require('debug')('express-sequelize');
+const http = require('http');
+const models = require('../models');
+
+const port = 3000;
+global.app.set('port', port);
+
+const server = http.createServer(global.app);
+
+models.sequelize.sync().then(function() {
+    server.listen(port, () => {
+        debug('Express server listening on port ' + server.address().port);
+    });
+
+    server.on('error', onError);
+});
+
+function onError(error) {
+    throw error;
+}

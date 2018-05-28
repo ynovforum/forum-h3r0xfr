@@ -1,0 +1,17 @@
+include ../inc/head.pug
+
+h1 Créer un compte
+
+form(method='post')
+    div
+        input(type='text', name='username', placeholder='Pseudo')
+    div
+        input(type='email', name='email', placeholder='Adresse e-mail')
+    div
+        input(type='password', name='password', placeholder='Mot de passe')
+    div
+        input(type='password', name='password2', placeholder='Confirmer le mot de passe')
+    div
+        input(type='submit', value='Créer un compte')
+
+include ../inc/foot.pug

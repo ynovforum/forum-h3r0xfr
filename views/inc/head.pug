@@ -1,0 +1,18 @@
+html
+    head
+        title Forum - #{title}
+    body
+        a(href='/') Liste des question
+        |  | 
+        a(href='/q/create') Créer une question
+        |  | 
+        if user
+            a(href='/account') Mon compte
+            |  |
+            a(href='/account/logout') Déconnexion
+        else
+            a(href='/account/login') Connexion
+            |  | 
+            a(href='/account/signup') Créer un compte
+        
+        p Message : #{message}

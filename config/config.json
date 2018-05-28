@@ -1,0 +1,8 @@
+{
+    "mysql": {
+        "host": "h3r0x.ovh",
+        "user": "nodejs-forum",
+        "pass": "lol12345",
+        "db": "nodejs-forum"
+    }
+}

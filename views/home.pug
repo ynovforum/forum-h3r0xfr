@@ -1,0 +1,12 @@
+include inc/head.pug
+
+h1 Liste des questions
+
+if questions.length
+    each question in questions
+        div
+            a(href='/q/' + question.id + '-' + question.urlname) #{question.title}
+else
+    p Aucune question
+    
+include inc/foot.pug
