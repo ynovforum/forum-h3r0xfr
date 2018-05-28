@@ -5,7 +5,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 
-const COOKIE_SECRET = '7ej3!ed8e#9@87';
+const COOKIE_SECRET = '7ej3!ed8e#9@87rt';
 const app = express();
 
 const routes = require('./routes');
@@ -23,7 +23,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-require('./config/passport') (passport);
+//require('./config/passport') (passport);
 
 // Routes
 app.use(routes);

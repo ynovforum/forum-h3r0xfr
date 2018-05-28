@@ -1,20 +1,27 @@
-module.exports = (passport) => {
+module.exports = (passport, bcrypt) => {
     const LocalStrategy = require('passport-local').Strategy;
-    const bcrypt = require('bcrypt');
     const models = require('../models');
 
     passport.use(new LocalStrategy((username, password, callback) => {
 
         models.User
-            .findOne({ username })
+            .findOne({
+                where: {
+                    username: username
+                }
+            })
             .then((user) => {
                 if(!user) {
-                    return callback(null, false, req.flash('authMessage', 'Utilisateur non trouvé.'));
+                    return callback(null, false, {
+                        message: 'Utilisateur non trouvé.'
+                    });
                 }
 
-                bcrypt.compare(password, user.password, (isValid) => {
-                    if(isValid) {
-                        return callback(null, false, req.flash('authMessage', 'Mot de passe incorrect.'));
+                bcrypt.compare(password, user.password, (err, result) => {
+                    if(err || !result) {
+                        return callback(null, false, {
+                            message: 'Mot de passe incorrect.'
+                        });
                     }
 
                     callback(null, user);
