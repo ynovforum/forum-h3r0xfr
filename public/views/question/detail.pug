@@ -1,0 +1,28 @@
+include ../inc/head.pug
+
+h1 #{question.title}
+p #{question.content}
+p Créé par #{question.User.username} #{moment(question.createdAt).fromNow()}
+
+hr
+h3 Réponses
+
+if question.Comments
+    each comment in question.Comments
+        p [#{comment.User.username}] #{comment.title} : #{comment.content} 
+            if user && comment.User.id == user.id
+                span (
+                    a(href='/q/comment/' + comment.id + '/delete') Supprimer
+                | )
+else
+    p Aucune réponse pour le moment.
+
+if user
+    hr
+    h3 Ajouter une réponse
+    form(method='post')
+        input(type='text', name='title', placeholder='Titre')
+        input(type='text', name='content', placeholder='Contenu')
+        input(type='submit', value='Envoyer')
+
+include ../inc/foot.pug

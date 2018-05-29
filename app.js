@@ -10,8 +10,12 @@ const app = express();
 
 const routes = require('./routes');
 
+// Dates
+app.locals.moment = require('moment');
+app.locals.moment.locale('fr');
+
 // Views
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'pug');
 
 app.use(cookieParser(COOKIE_SECRET));
@@ -22,8 +26,6 @@ app.use(session({ secret: COOKIE_SECRET, resave: false, saveUninitialized: false
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
-//require('./config/passport') (passport);
 
 // Routes
 app.use(routes);

@@ -7,7 +7,8 @@ router.get('/', (req, res) => {
     }).then(function(questions) {
         res.render('home', {
             title: 'Liste des questions',
-            questions: questions
+            questions: questions,
+            user: req.user
         });
     });
 });
