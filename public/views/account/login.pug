@@ -6,18 +6,42 @@ div.login
     div.box
         div.header
             i.material-icons account_circle
-            h2 Welcome back! Please login.
+            h2 Connexion au compte
 
         div.content
+            
+            if message.length
+                div.error
+                    p 
+                        i.material-icons warning
+                        | #{message}
+            
             form(method='post')
-                label Sign in with your e-mail address
-                input(type='text', name='username', placeholder='Pseudo')
+                label Pseudo
+                input(type='text', name='username', placeholder='Entrez votre pseudo', required)
                 
-                label Password
-                input(type='password', name='password', placeholder='Mot de passe')
+                label Mot de passe
+                input(type='password', name='password', placeholder='Entrez votre mot de passe', required)
                 
-                button(type='submit') Sign in to Dashboard
+                button(type='submit').btn Connexion
+                
+            div.separator
+                span Réseaux sociaux
+                
+            div.social
+                div
+                    button.btn-social.twitter
+                        img(src='/assets/img/icon/twitter-icon.png')
+                div
+                    button.btn-social.facebook
+                        img(src='/assets/img/icon/facebook-icon.png')
+                div
+                    button.btn-social.pinterest
+                        img(src='/assets/img/icon/pinterest-icon.png')
+                div
+                    button.btn-social.dribbble
+                        img(src='/assets/img/icon/dribbble-icon.png')
     
     div.bottom
-        p.left Don’t have an account yet? Get Started
-        p.right Forgot Password?
+        a(href='/account/signup').left Pas encore de compte? Créez-en un
+        a(href='/account/password').right Mot de passe oublié

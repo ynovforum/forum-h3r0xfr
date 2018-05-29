@@ -1,17 +1,35 @@
-include ../inc/head.pug
+link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Source+Sans+Pro')
+link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+link(rel='stylesheet', href='/assets/css/login.css', type='text/css')
 
-h1 Créer un compte
+div.login
+    div.box
+        div.header
+            i.material-icons account_circle
+            h2 Créer un compte
 
-form(method='post')
-    div
-        input(type='text', name='username', placeholder='Pseudo')
-    div
-        input(type='email', name='email', placeholder='Adresse e-mail')
-    div
-        input(type='password', name='password', placeholder='Mot de passe')
-    div
-        input(type='password', name='password2', placeholder='Confirmer le mot de passe')
-    div(style='margin-top:10px')
-        input(type='submit', value='Créer un compte')
+        div.content
+            
+            if message.length
+                div.error
+                    p 
+                        i.material-icons warning
+                        | #{message}
 
-include ../inc/foot.pug
+            form(method='post')
+                label Pseudo
+                input(type='text', name='username', placeholder='Entrez un pseudo', required)
+                
+                label Adresse e-mail
+                input(type='email', name='email', placeholder='Entrez une adresse e-mail', required)
+                
+                label Mot de passe
+                input(type='password', name='password', placeholder='Entrez un mot de passe', required)
+                
+                label Confirmation
+                input(type='password', name='password2', placeholder='Confirmez le mot de passe', required)
+                
+                button(type='submit').btn Créer un compte
+                    
+    div.bottom
+        a(href='/account/login').left Déjà un compte? Connectez-vous
