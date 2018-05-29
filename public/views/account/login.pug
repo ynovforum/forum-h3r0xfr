@@ -1,13 +1,23 @@
-include ../inc/head.pug
+link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Source+Sans+Pro')
+link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+link(rel='stylesheet', href='/assets/css/login.css', type='text/css')
 
-h1 Connexion
+div.login
+    div.box
+        div.header
+            i.material-icons account_circle
+            h2 Welcome back! Please login.
 
-form(method='post')
-    div
-        input(type='text', name='username', placeholder='Pseudo')
-    div
-        input(type='password', name='password', placeholder='Mot de passe')
-    div(style='margin-top:10px')
-        input(type='submit', value='Connexion')
-
-include ../inc/foot.pug
+        div.content
+            form(method='post')
+                label Sign in with your e-mail address
+                input(type='text', name='username', placeholder='Pseudo')
+                
+                label Password
+                input(type='password', name='password', placeholder='Mot de passe')
+                
+                button(type='submit') Sign in to Dashboard
+    
+    div.bottom
+        p.left Don’t have an account yet? Get Started
+        p.right Forgot Password?
