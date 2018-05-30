@@ -1,0 +1,156 @@
+@import 'common';
+@import 'form';
+
+.login {
+    width: 450px;
+    height: 500px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    a {
+        text-decoration: none;
+        color: #7f8fa4;
+    }
+
+    button {
+        cursor: pointer;
+        outline: none;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+    ::placeholder {
+        font-weight: lighter;
+        opacity: 0.5;
+    }
+
+    .box {
+        .header {
+            h2 {
+                margin: 0;
+                font-weight: lighter;
+            }
+
+            i.material-icons {
+                font-size: 5em;
+                margin-top: -40px;
+                margin-bottom: 5px;
+                color: #2b9ff7;
+            }
+
+            height: 20%;
+            background-color: #f8fafc;
+            text-align: center;
+            border-radius: 2% 2% 0 0;
+            border-bottom: 0.5px solid lightgray;
+        }
+
+        .content {
+
+            .social {
+                padding: 30px 10px;
+                display: flex;
+                text-align: center;
+
+                div {
+                    width: (100%/4);
+
+                    .btn-social {
+                        padding: 20px;
+                        width: 70px;
+                        border-radius: 5px;
+
+                        img {
+                            width: 100%;
+                        }
+                    }
+
+                    .twitter { background: linear-gradient(#4cc3ff, #00abff); }
+                    .facebook { background: linear-gradient(#2491e4, #1080d3); }
+                    .pinterest { background: linear-gradient(#f45438, #d63e24); }
+                    .dribbble { background: linear-gradient(#ea4c89, #d22f6e); }
+                }
+            }
+
+            .separator {
+                display: block;
+                text-align: center;
+                overflow: hidden;
+                white-space: nowrap;
+
+                span {
+                    position: relative;
+                    display: inline-block;
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: #7f8fa4;
+                }
+
+                span:before, span:after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    width: 9999px;
+                    height: 1px;
+                    background: lightgray;
+                }
+
+                span:before {
+                    right: 100%;
+                    margin-right: 15px;
+                }
+
+                span:after {
+                    left: 100%;
+                    margin-left: 15px;
+                }
+            }
+
+            .error {
+                margin-bottom: 10px;
+                background-color: lightcoral;
+                color: white;
+                padding: 10px;
+
+                p {
+                    margin: 0;
+
+                    i.material-icons {
+                        vertical-align: middle;
+                        margin-right: 5px;
+                    }
+                }
+            }
+
+            form {
+                padding: 25px;
+                margin: 0;
+            }
+        }
+
+        background-color: white;
+        border-radius: 1%;
+        border: 1px solid lightgray;
+    }
+
+    .bottom {
+        display: flex;
+        font-size: 14px;
+        margin-top: 10px;
+
+        .left {
+            width: 70%;
+        }
+
+        .right {
+            text-align: right;
+            width: 30%;
+        }
+    }
+}

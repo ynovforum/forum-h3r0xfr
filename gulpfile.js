@@ -24,12 +24,12 @@ const AUTOPREFIXER_BROWSERS = [
 
 // Gulp task to minify CSS files
 gulp.task('styles', () => {
-    return gulp.src('./public/sass/*.scss')
+    return gulp.src('./src/sass/*.scss')
         .pipe(sass({
             outputStyle: 'nested',
             precision: 10,
             includePaths: ['.'],
-            onError: console.error.bind(console, 'Sass error:')
+            onError: console.error.bind('Sass error :')
         }))
         .pipe(autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
         .pipe(csso())
@@ -38,7 +38,7 @@ gulp.task('styles', () => {
 
 // Gulp task to minify JavaScript files
 gulp.task('scripts', () => {
-    return gulp.src('./public/js/**/*.js')
+    return gulp.src('./src/js/**/*.js')
         .pipe(uglify())
         .pipe(gulp.dest('./public/assets/js'))
 });
@@ -58,8 +58,8 @@ gulp.task('clean', () => del(['dist']));
 // Gulp task to minify all files
 gulp.task('default', ['clean'], () => {
     // Automation
-    gulp.watch("./public/sass/*.scss", ['styles']);
-    gulp.watch("./public/js/**/*.js", ['scripts']);
+    gulp.watch("./src/sass/*.scss", ['styles']);
+    gulp.watch("./src/js/**/*.js", ['scripts']);
 
     runSequence('styles', 'scripts', 'server');
 });
