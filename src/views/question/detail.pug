@@ -5,13 +5,17 @@ div.content
         div.container-full
             div.box
                 h2 #{question.title}
+                    span.action-right
+                        i.material-icons edit
+                        i.material-icons delete
+                
                 | !{question.description}
                 p Créé par #{question.User.name} #{moment(question.createdAt).fromNow()}
 
                 hr
                 h3 Réponses
 
-                if question.Comments
+                if question.Comments.length
                     each comment in question.Comments
                         p [#{comment.User.name}] #{comment.title} : #{comment.content} 
                             if user && comment.User.id == user.id

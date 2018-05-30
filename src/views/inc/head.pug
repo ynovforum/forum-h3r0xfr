@@ -7,7 +7,7 @@ html
         link(rel='stylesheet', href='/assets/css/main.css', type='text/css')
             
         script(src='/assets/js/tinymce/tinymce.min.js')
-        script(type='text/javascript') tinymce.init({ selector: '.tinyedit', height: 300, plugins: 'advlist autolink link image lists charmap print preview' });
+        script(src='/assets/js/global/tinymce.js')
     body
         div.navbar
             div.left-menu
@@ -25,7 +25,11 @@ html
                     img(src='/assets/img/avatar.jpg').avatar
                 
         div.title
-            p #{title}
+            p
+                if question
+                    | Question ##{question.id}
+                else
+                    | #{title}
                 span Automatically saved
                 
         div.notification
