@@ -1,6 +1,10 @@
 include ../inc/head.pug
 
-h1 #{user.username}
-p #{user.email}
+div.content
+    div.container
+        div.container-full
+            div.box
+                h2 #{user.name}
+                p #{user.email}
 
 include ../inc/foot.pug

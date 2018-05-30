@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    background-color: #eff3f6;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.navbar {
+    display: flex;
+    background: linear-gradient(#2da1f8, #1992ec);
+    height: 65px;
+    width: 100%;
+
+    .left-menu {
+        width: 70%;
+        padding: 20px;
+
+        a {
+            text-decoration: none;
+            color: white;
+            margin-right: 35px;
+        }
+
+        a:hover {
+            background-color: #1166a5;
+            padding: 10px;
+            margin: 0px 25px 0 -10px;
+            border-radius: 5px;
+        }
+    }
+
+    .right-menu {
+        width: 30%;
+        padding: 20px;
+        text-align: right;
+
+        .avatar {
+            width: 40px;
+            margin-top: -10px;
+            border-radius: 50px;
+        }
+    }
+}
+
+.title {
+    height: 65px;
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+
+    p {
+        font-size: 24px;
+        margin: 0;
+        padding: 16px 20px;
+    }
+
+    span {
+        float: right;
+        font-size: 16px;
+        margin-top: 6px;
+    }
+}
+
+.content {
+    margin: auto;
+    padding-top: 20px;
+
+    .box {
+        background-color: white;
+        border-radius: 1%;
+        border: 1px solid lightgray;
+        padding: 20px;
+        margin: 0 20px;
+
+        h2 {
+            margin-top: 0;
+        }
+    }
+
+    .container {
+        display: flex;
+        width: 80%;
+        margin: auto;
+
+        .container-left {
+            width: 40%;
+        }
+
+        .container-right {
+            width: 60%;
+        }
+
+        .container-full {
+            width: 100%;
+        }
+    }
+}
+
+.notification {
+    margin: 20px auto auto;
+    width: 80%;
+
+    .alert {
+        color: white;
+        padding: 10px;
+        margin: 10px 20px 0 20px;
+
+        &.error {
+            background-color: lightcoral;
+        }
+
+        &.success {
+            background-color: lightgreen;
+        }
+
+        p {
+            margin: 0;
+
+            i.material-icons {
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+        }
+    }
+}

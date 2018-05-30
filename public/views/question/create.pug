@@ -1,13 +1,17 @@
 include ../inc/head.pug
 
-h1 Créer une question
+div.content
+    div.container
+        div.container-full
+            div.box
+                h2 Créer une question
 
-form(method='post')
-    div
-        input(type='text', name='title', placeholder='Titre')
-    div
-        textarea(name='content', placeholder='Contenu')
-    div
-        input(type='submit', value='Créer')
+                form(method='post')
+                    div
+                        input(type='text', name='title', placeholder='Titre')
+                    div
+                        textarea(name='description', placeholder='Description')
+                    div
+                        input(type='submit', value='Créer')
 
 include ../inc/foot.pug

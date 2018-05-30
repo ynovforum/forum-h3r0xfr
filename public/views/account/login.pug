@@ -6,7 +6,7 @@ div.login
     div.box
         div.header
             i.material-icons account_circle
-            h2 Connexion au compte
+            h2 Bienvenue ! Connectez-vous.
 
         div.content
             
@@ -17,8 +17,8 @@ div.login
                         | #{message}
             
             form(method='post')
-                label Pseudo
-                input(type='text', name='username', placeholder='Entrez votre pseudo', required)
+                label Adresse e-mail
+                input(type='email', name='email', placeholder='Entrez votre adresse e-mail', required)
                 
                 label Mot de passe
                 input(type='password', name='password', placeholder='Entrez votre mot de passe', required)

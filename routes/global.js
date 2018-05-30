@@ -8,7 +8,9 @@ router.get('/', (req, res) => {
         res.render('home', {
             title: 'Liste des questions',
             questions: questions,
-            user: req.user
+            user: req.user,
+            errorMessage: req.flash('errorMessage'),
+            successMessage: req.flash('successMessage')
         });
     });
 });

@@ -3,8 +3,9 @@
 module.exports = (sequelize, DataTypes) => {
     let Question = sequelize.define('Question', {
         title: DataTypes.STRING,
-        content: DataTypes.STRING,
-        urlname: DataTypes.STRING
+        description: DataTypes.STRING,
+        urlname: DataTypes.STRING,
+        resolvedAt: DataTypes.DATE
     });
 
     Question.associate = (models) => {

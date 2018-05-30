@@ -2,18 +2,18 @@ module.exports = (passport, bcrypt) => {
     const LocalStrategy = require('passport-local').Strategy;
     const models = require('../models');
 
-    passport.use(new LocalStrategy((username, password, callback) => {
+    passport.use(new LocalStrategy((email, password, callback) => {
 
         models.User
             .findOne({
                 where: {
-                    username: username
+                    email: email
                 }
             })
             .then((user) => {
                 if(!user) {
                     return callback(null, false, {
-                        message: 'Utilisateur non trouvé.'
+                        message: 'Utilisateur non trouvé. Vérifiez votre adresse e-mail.'
                     });
                 }
 

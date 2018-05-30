@@ -7,7 +7,9 @@ module.exports = (needAuth) => {
     router.get('/create', needAuth, (req, res) => {
         res.render('question/create', {
             title: 'Créer une question',
-            user: req.user
+            user: req.user,
+            errorMessage: req.flash('errorMessage'),
+            successMessage: req.flash('successMessage')
         });
     });
 
@@ -18,7 +20,7 @@ module.exports = (needAuth) => {
             let urlname = slug(fields.title);
             models.Question.create({
                 title: fields.title,
-                content: fields.content,
+                description: fields.description,
                 urlname: urlname,
                 UserId: req.user.id
             }).then((question) => {
@@ -35,7 +37,9 @@ module.exports = (needAuth) => {
             res.render('question/detail', {
                 title: question.title,
                 question: question,
-                user: req.user
+                user: req.user,
+                errorMessage: req.flash('errorMessage'),
+                successMessage: req.flash('successMessage')
             });
         });
     });

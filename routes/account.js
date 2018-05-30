@@ -10,11 +10,14 @@ module.exports = (needAuth, noAuth) => {
     router.get('/', needAuth, (req, res) => {
         res.render('account/profile', {
             title: 'Mon compte',
-            user: req.user
+            user: req.user,
+            errorMessage: req.flash('errorMessage'),
+            successMessage: req.flash('successMessage')
         });
     });
 
     router.get('/logout', needAuth, (req, res) => {
+        req.flash('successMessage', 'Vous avez été déconnecté.');
         req.logout();
         res.redirect('/');
     });
@@ -30,7 +33,7 @@ module.exports = (needAuth, noAuth) => {
         let form = new formidable.IncomingForm();
         form.parse(req, (err, fields, files) => {
             req.body = {
-                username: fields.username,
+                username: fields.email,
                 password: fields.password
             };
 
@@ -53,7 +56,7 @@ module.exports = (needAuth, noAuth) => {
         let form = new formidable.IncomingForm();
 
         form.parse(req, (err, fields, files) => {
-            const { username, email, password, password2 } = fields;
+            const { name, email, password, password2 } = fields;
 
             if(password != password2) {
                 req.flash('authMessage', 'Les mots de passe doivent être identiques.');
@@ -64,7 +67,7 @@ module.exports = (needAuth, noAuth) => {
                 .hash(password, 12)
                 .then((hash) => {
                     models.User
-                        .create({ username, email, password: hash, role: 'user' })
+                        .create({ name, email, password: hash, role: 'user' })
                         .then((user) => {
                             req.login(user, () => res.redirect('/'));
                         });
