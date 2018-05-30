@@ -67,7 +67,7 @@ module.exports = (needAuth, noAuth) => {
                 .hash(password, 12)
                 .then((hash) => {
                     models.User
-                        .create({ name, email, password: hash, role: 'user' })
+                        .create({ name, email, password: hash })
                         .then((user) => {
                             req.login(user, () => res.redirect('/'));
                         });

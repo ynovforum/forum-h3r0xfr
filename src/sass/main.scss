@@ -71,6 +71,10 @@
         h2 {
             margin-top: 0;
         }
+
+        #editTitle {
+            display: none;
+        }
     }
 
     .container {
@@ -100,6 +104,7 @@
         color: white;
         padding: 10px;
         margin: 10px 20px 0 20px;
+        border-radius: 5px;
 
         &.error {
             background-color: lightcoral;
@@ -126,5 +131,10 @@
     i {
         margin-left: 10px;
         cursor: pointer;
+    }
+
+    .resolved {
+        padding-right: 10px;
+        border-right: 1px solid lightgray;
     }
 }

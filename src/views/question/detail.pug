@@ -4,13 +4,18 @@ div.content
     div.container
         div.container-full
             div.box
-                h2 #{question.title}
-                    span.action-right
-                        i.material-icons edit
-                        i.material-icons delete
+                h2.question-title #{question.title}
+                    if user && (question.User.id == user.id || user.role == 'admin')
+                        span.action-right
+                            i.material-icons.resolved check
+                            i.material-icons.edit edit
+                            i.material-icons.delete delete
                 
-                | !{question.description}
-                p Créé par #{question.User.name} #{moment(question.createdAt).fromNow()}
+                if user && (question.User.id == user.id || user.role == 'admin')
+                    input(type='text', value=question.title, placeholder='Titre')#editTitle
+                
+                div.question-content !{question.description}
+                p.right Créé par #{question.User.name} #{moment(question.createdAt).fromNow()}
 
                 hr
                 h3 Réponses
@@ -18,10 +23,11 @@ div.content
                 if question.Comments.length
                     each comment in question.Comments
                         p [#{comment.User.name}] #{comment.title} : #{comment.content} 
-                            if user && comment.User.id == user.id
-                                span (
-                                    a(href='/q/comment/' + comment.id + '/delete') Supprimer
-                                | )
+                            if user && (comment.User.id == user.id || user.role == 'admin')
+                                span.action-right
+                                    i.material-icons.edit edit
+                                    a(href='/q/comment/' + comment.id + '/delete')
+                                        i.material-icons.delete delete
                 else
                     p Aucune réponse pour le moment.
 
@@ -34,3 +40,4 @@ div.content
                         button(type='submit').btn Envoyer
 
 include ../inc/foot.pug
+script(src='/assets/js/question/main.js')

@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
         name: DataTypes.STRING,
         email: DataTypes.STRING,
         password: DataTypes.STRING,
-        bio: DataTypes.STRING,
-        role: DataTypes.ENUM('user', 'admin')
+        bio: DataTypes.TEXT,
+        role: { type: DataTypes.ENUM('user', 'admin'), defaultValue: 'user' }
     });
 
     User.associate = (models) => {

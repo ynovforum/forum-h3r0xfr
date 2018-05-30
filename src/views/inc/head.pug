@@ -33,13 +33,13 @@ html
                 span Automatically saved
                 
         div.notification
-            if errorMessage.length
+            if errorMessage && errorMessage.length
                 div.alert.error
                     p
                         i.material-icons warning
                         | #{errorMessage}
                         
-            if successMessage.length
+            if successMessage && successMessage.length
                 div.alert.success
                     p 
                         i.material-icons check

@@ -37,9 +37,7 @@ module.exports = (needAuth) => {
             res.render('question/detail', {
                 title: question.title,
                 question: question,
-                user: req.user,
-                errorMessage: req.flash('errorMessage'),
-                successMessage: req.flash('successMessage')
+                user: req.user
             });
         });
     });

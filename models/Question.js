@@ -3,7 +3,7 @@
 module.exports = (sequelize, DataTypes) => {
     let Question = sequelize.define('Question', {
         title: DataTypes.STRING,
-        description: DataTypes.STRING,
+        description: DataTypes.TEXT,
         urlname: DataTypes.STRING,
         resolvedAt: DataTypes.DATE
     });
