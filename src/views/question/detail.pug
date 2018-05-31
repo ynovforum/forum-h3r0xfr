@@ -2,9 +2,12 @@ include ../inc/head.pug
 
 div.content
     div.container
-        div.container-full
+        div.container-8
             div.box
-                h2.question-title #{question.title}
+                div.question-header
+                    img(src='/assets/img/avatar.jpg').avatar
+                    h2.question-title #{question.title}
+                        span.question-author #{question.User.name} | #{moment(question.createdAt).fromNow()}
                     if user && (question.User.id == user.id || user.role == 'admin')
                         span.action-right
                             i.material-icons.resolved check
@@ -15,12 +18,10 @@ div.content
                     input(type='text', value=question.title, placeholder='Titre')#editTitle
                 
                 div.question-content !{question.description}
-                p.right Créé par #{question.User.name} #{moment(question.createdAt).fromNow()}
-
-                hr
-                h3 Réponses
 
                 if question.Comments.length
+                    p #{question.Comments.length} réponses
+                    hr
                     each comment in question.Comments
                         p [#{comment.User.name}] #{comment.title} : #{comment.content} 
                             if user && (comment.User.id == user.id || user.role == 'admin')
@@ -28,8 +29,7 @@ div.content
                                     i.material-icons.edit edit
                                     a(href='/q/comment/' + comment.id + '/delete')
                                         i.material-icons.delete delete
-                else
-                    p Aucune réponse pour le moment.
+
 
                 if user
                     hr
@@ -38,6 +38,26 @@ div.content
                         input(type='text', name='title', placeholder='Titre')
                         input(type='text', name='content', placeholder='Contenu')
                         button(type='submit').btn Envoyer
+                        
+        div.container-4
+            div.container-12
+                div.box.secondary
+                    h4 
+                        i.material-icons help_outline
+                        | Tips for asking questions
+                    p Every question you ask should help you gather either facts or an opinion. Know which kind of information you need and frame your questions accordingly.
+                    hr
+                    h4 
+                        i.material-icons help_outline
+                        | Search & Research
+                    p Even if you don't find a useful answer elsewhere on the site, including links to related questions that haven't helped can help others in understanding how your question is different from the rest.
+
+                    hr
+                    div.secondary-footer
+                        a(href='#') Still need help? Contact Support
+            div.container-12
+                div.box
+                    p Test
 
 include ../inc/foot.pug
 script(src='/assets/js/question/main.js')

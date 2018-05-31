@@ -30,10 +30,10 @@
         padding: 20px;
         text-align: right;
 
-        .avatar {
-            width: 40px;
+        img {
+            width: 45px;
+            height: initial;
             margin-top: -10px;
-            border-radius: 50px;
         }
     }
 }
@@ -63,17 +63,74 @@
 
     .box {
         background-color: white;
-        border-radius: 1%;
+        border-radius: 4px;
         border: 1px solid lightgray;
         padding: 20px;
         margin: 0 20px;
+
+        &.secondary {
+            background-color: #fafbfc;
+
+            .secondary-footer {
+                margin: -20px;
+                padding: 20px;
+                text-align: center;
+                background-color: white;
+                border-top: 0.5px solid lightgray;
+                border-radius: 0 0 4px 4px;
+            }
+        }
 
         h2 {
             margin-top: 0;
         }
 
+        h4 {
+            margin: 0 0 10px;
+        }
+
+        p {
+            margin: 0;
+            color: #7c8ca5;
+        }
+
+        hr {
+            margin: 15px -20px;
+            border: 0.5px solid lightgray;
+        }
+
         #editTitle {
             display: none;
+        }
+
+        .question-header {
+            display: flex;
+
+            img {
+                width: 62px;
+                margin-right: 20px;
+            }
+
+            .question-title{
+                width: 60%;
+
+                .question-author {
+                    display: block;
+                    color: #7c8ca5;
+                    font-size: 14px;
+                    margin-top: 5px;
+                }
+            }
+
+            .action-right {
+                width: 31%;
+            }
+        }
+
+        .question-content {
+            img {
+                max-width: 100%;
+            }
         }
     }
 
@@ -93,6 +150,23 @@
         .container-full {
             width: 100%;
         }
+
+        @for $i from 1 through 12 {
+            .container-#{$i} {
+                width: (100% / 12) * $i;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            display: block;
+            width: 90%;
+
+            div[class *= "container-"] {
+                width: 100%;
+            }
+        }
+
     }
 }
 
@@ -126,7 +200,7 @@
 }
 
 .action-right {
-    float: right;
+    text-align: right;
 
     i {
         margin-left: 10px;
