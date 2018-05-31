@@ -44,6 +44,17 @@ module.exports = (needAuth) => {
         });
     });
 
+    router.post('/:id/resolve', (req, res) => {
+        models.Question.update({
+            resolvedAt: models.Sequelize.NOW
+        }, {
+            where: { id: req.params.id }
+        }).then((question) => {
+            req.flash('successMessage', 'Votre question a été marquée comme résolue.');
+            res.redirect('back');
+        });
+    });
+
     // Comments
     router.post('/:id-:urlname', needAuth, (req, res) => {
         let form = new formidable.IncomingForm();

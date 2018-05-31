@@ -6,7 +6,7 @@ const del = require('del');
 const gulp = require('gulp');
 const runSequence = require('run-sequence');
 const sass = require('gulp-sass');
-const uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify-es').default;
 const exec = require('child_process').exec;
 
 // Set the browser that you want to support

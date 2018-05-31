@@ -256,5 +256,10 @@
     i {
         margin-left: 10px;
         cursor: pointer;
+
+        &.resolved-icon {
+            cursor: auto;
+            color: #6ecc6e;
+        }
     }
 }

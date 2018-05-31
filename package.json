@@ -35,6 +35,7 @@
         "gulp-csso": "^2.0.0",
         "gulp-sass": "^2.0.0",
         "gulp-uglify": "^2.0.0",
+        "gulp-uglify-es": "^1.0.4",
         "run-sequence": "^1.2.2"
     }
 }

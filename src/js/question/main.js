@@ -1,6 +1,11 @@
 const actionBar = $('.question-header .action-right');
 const actionsBase = actionBar.html();
-const savedContent = [];
+//const savedContent = [];
+
+// Ouvrir tous les liens dans le contenu de la question et des commentaires dans un nouvel onglet
+$('.question-content a, .comment-content a').each((i, el) => {
+    $(el).attr('target', '_blank');
+});
 
 $('.box .resolved').on('click', resolvedQuestion);
 $('.box .answer').on('click', answerQuestion);
@@ -8,14 +13,14 @@ $('.question-header .edit').on('click', editQuestion);
 $('.question-header .delete').on('click', deleteQuestion);
 
 function btnLoad(element, message) {
-    savedContent.push(element);
-    savedContent[element] = element.html();
+    /*savedContent.push(element);
+    savedContent[element] = element.html();*/
     element.html('<i class="material-icons material-spin">refresh</i>' + message).attr('disabled', true);
 }
 
-function btnReset(element) {
+/*function btnReset(element) {
     element.html(savedContent[element]).attr('disabled', false);
-}
+}*/
 
 function resolvedQuestion() {
     if(confirm('Voulez-vous vraiment marquer cette question comme résolue ?')) {
@@ -23,13 +28,13 @@ function resolvedQuestion() {
         const oldContent = btn.html();
 
         btnLoad(btn, 'Modification de l\'état...');
-        setTimeout(function() { btnReset(btn); }, 5000);
+        btn.parent('form').submit();
     }
 }
 
 function answerQuestion(e) {
     e.preventDefault();
-    if($('.tinycomment').val().length < 1) {
+    if(tinymce.get('newComment').getContent().length < 1) {
         alert('Vous devez entrer une réponse.');
     } else {
         const btn = $('.box .answer');
@@ -47,7 +52,7 @@ function editQuestion() {
 }
 
 function deleteQuestion() {
-    if(confirm('Voulez-vous vraiment supprimer cette question ?')) {
+    if(confirm('Voulez-vous vraiment supprimer la question ? Cette action est irréversible.')) {
         alert('Question supprimée.');
     }
 }

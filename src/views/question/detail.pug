@@ -8,8 +8,11 @@ div.content
                     img(src='/assets/img/avatar.jpg').avatar
                     h2.question-title #{question.title}
                         span.question-author #{question.User.name} | #{moment(question.createdAt).fromNow()}
-                    if user && (question.User.id == user.id || user.role == 'admin')
-                        span.action-right
+                    span.action-right
+                        if question.resolvedAt
+                            i.material-icons.resolved-icon check_circle
+                            | Résolue
+                        else if user && (question.User.id == user.id || user.role == 'admin')
                             i.material-icons.edit edit
                             i.material-icons.delete delete
                 
@@ -28,7 +31,7 @@ div.content
                                 div.comment-author #{comment.User.name} | #{moment(comment.createdAt).fromNow()}
                                     div.comment-content !{comment.content}
                                 
-                                if user && (comment.User.id == user.id || user.role == 'admin')
+                                if user && (comment.User.id == user.id || user.role == 'admin') && !question.resolvedAt
                                     span.action-right
                                         i.material-icons.edit edit
                                         a(href='/q/comment/' + comment.id + '/delete')
@@ -43,7 +46,7 @@ div.content
                 else if question.resolvedAt
                     p Cette question a été marquée comme résolue.
                 else                    
-                    p.suggest Vous connaissez quelqu'un ayant la réponse ? Partagez le lien de cette question via 
+                    p.suggest Partagez le lien de cette question via 
                         a(href='#') email
                         | , 
                         a(href='#') Google+
@@ -55,19 +58,20 @@ div.content
                         
                     p.ultralight Votre réponse
                     form(method='post')
-                        textarea(name='content').tinycomment
-                        button(type='submit').btn.answer Envoyer la réponse
+                        textarea(name='content')#newComment.tinycomment
+                        button(type='button').btn.answer Envoyer la réponse
                 
                         
         div.container-4
-            if user && (question.User.id == user.id || user.role == 'admin')
+            if user && (question.User.id == user.id || user.role == 'admin') && !question.resolvedAt
                 div.container-12
                     div.box
                         h4 Votre problème est résolu ?
                         p.light Marquez-le comme résolu pour indiquer que vous avez résolu votre problème. Vous ne pourrez plus recevoir de réponses à cette question.
-                        button(type='button').btn.resolved
-                            i.material-icons check_circle
-                            | Marquer comme résolu
+                        form(method='post', action='/q/' + question.id + '/resolve')
+                            button(type='button').btn.resolved
+                                i.material-icons check_circle
+                                | Marquer comme résolu
                             
             div.container-12
                 div.box.secondary
