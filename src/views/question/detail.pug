@@ -19,20 +19,20 @@ div.content
                 div.question-content !{question.description}
 
                 if question.Comments.length
-                    p #{question.Comments.length} réponses
+                    h4 #{question.Comments.length} réponse(s)
                     hr
-                    each comment in question.Comments
-                        
-                        div.comment
-                            img(src='/assets/img/avatar.jpg').avatar
-                            div.comment-author #{comment.User.name} | #{moment(comment.createdAt).fromNow()}
-                                div.comment-content !{comment.content}
-                            
-                            if user && (comment.User.id == user.id || user.role == 'admin')
-                                span.action-right
-                                    i.material-icons.edit edit
-                                    a(href='/q/comment/' + comment.id + '/delete')
-                                        i.material-icons.delete delete
+                    div.comments
+                        each comment in question.Comments
+                            div.comment
+                                img(src='/assets/img/avatar.jpg').avatar
+                                div.comment-author #{comment.User.name} | #{moment(comment.createdAt).fromNow()}
+                                    div.comment-content !{comment.content}
+                                
+                                if user && (comment.User.id == user.id || user.role == 'admin')
+                                    span.action-right
+                                        i.material-icons.edit edit
+                                        a(href='/q/comment/' + comment.id + '/delete')
+                                            i.material-icons.delete delete
 
 
                 hr
@@ -42,8 +42,18 @@ div.content
                         | pour répondre à cette question.
                 else if question.resolvedAt
                     p Cette question a été marquée comme résolue.
-                else
-                    h3 Ajouter une réponse
+                else                    
+                    p.suggest Vous connaissez quelqu'un ayant la réponse ? Partagez le lien de cette question via 
+                        a(href='#') email
+                        | , 
+                        a(href='#') Google+
+                        | , 
+                        a(href='#') Twitter
+                        |  ou 
+                        a(href='#') Facebook
+                        | .
+                        
+                    p.ultralight Votre réponse
                     form(method='post')
                         textarea(name='content').tinycomment
                         button(type='submit').btn.answer Envoyer la réponse
@@ -54,7 +64,7 @@ div.content
                 div.container-12
                     div.box
                         h4 Votre problème est résolu ?
-                        p Marquez-le comme résolu pour indiquer que vous avez résolu votre problème. Vous ne pourrez plus recevoir de réponses à cette question.
+                        p.light Marquez-le comme résolu pour indiquer que vous avez résolu votre problème. Vous ne pourrez plus recevoir de réponses à cette question.
                         button(type='button').btn.resolved
                             i.material-icons check_circle
                             | Marquer comme résolu
@@ -64,12 +74,12 @@ div.content
                     h4 
                         i.material-icons help_outline
                         | Tips for asking questions
-                    p Every question you ask should help you gather either facts or an opinion. Know which kind of information you need and frame your questions accordingly.
+                    p.light Every question you ask should help you gather either facts or an opinion. Know which kind of information you need and frame your questions accordingly.
                     hr
                     h4 
                         i.material-icons help_outline
                         | Search & Research
-                    p Even if you don't find a useful answer elsewhere on the site, including links to related questions that haven't helped can help others in understanding how your question is different from the rest.
+                    p.light Even if you don't find a useful answer elsewhere on the site, including links to related questions that haven't helped can help others in understanding how your question is different from the rest.
 
                     hr
                     div.secondary-footer

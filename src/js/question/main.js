@@ -27,10 +27,15 @@ function resolvedQuestion() {
     }
 }
 
-function answerQuestion() {
-    const btn = $('.box .answer');
-    btnLoad(btn, 'Envoi de la réponse...');
-    btn.parent('form').submit();
+function answerQuestion(e) {
+    e.preventDefault();
+    if($('.tinycomment').val().length < 1) {
+        alert('Vous devez entrer une réponse.');
+    } else {
+        const btn = $('.box .answer');
+        btnLoad(btn, 'Envoi de la réponse...');
+        btn.parent('form').submit();
+    }
 }
 
 function editQuestion() {

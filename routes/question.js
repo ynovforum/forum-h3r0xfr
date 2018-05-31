@@ -65,6 +65,7 @@ module.exports = (needAuth) => {
             where: { id: req.params.id, UserId: req.user.id }
         }).then((comment) => {
             comment.destroy();
+            req.flash('successMessage', 'Votre commentaire a été supprimé.');
             res.redirect('back');
         });
     });

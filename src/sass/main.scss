@@ -89,14 +89,29 @@
             margin: 0 0 10px;
         }
 
-        p {
-            margin: 0;
+        .light {
             color: #7c8ca5;
+            margin: 0;
+        }
+
+        .ultralight {
+            color: #7c8ca5;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .suggest {
+            color: #7c8ca5;
+            font-weight: bold;
         }
 
         hr {
             margin: 15px -20px;
             border: 0.5px solid lightgray;
+        }
+
+        img {
+            max-width: 100%;
         }
 
         #editTitle {
@@ -128,9 +143,11 @@
         }
 
         .question-content {
-            img {
-                max-width: 100%;
-            }
+            margin-bottom: 10px;
+        }
+
+        .comments {
+            margin-top: 20px;
         }
 
         .comment {
@@ -140,23 +157,26 @@
                 margin-bottom: 25px;
             }
 
-            img {
+            .avatar {
                 width: 62px;
                 margin-right: 20px;
             }
 
             .comment-author {
-                width: 60%;
+                width: 80%;
+                color: #7c8ca5;
+                font-size: 14px;
+                font-weight: bold;
 
                 .comment-content {
-                    color: #7c8ca5;
-                    font-size: 14px;
-                    margin-top: 5px;
+                    color: black;
+                    margin-top: 15px;
+                    font-weight: lighter;
                 }
             }
 
             .action-right {
-                width: 31%;
+                width: 15%;
             }
         }
     }
