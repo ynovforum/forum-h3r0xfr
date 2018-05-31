@@ -33,4 +33,17 @@ input:focus {
     border-radius: 5px;
     font-size: 14px;
     margin-top: 10px;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    outline: none;
+
+    &:hover:not(:disabled) {
+        box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.5), 0 0px 15px 0 rgba(0, 0, 0, 0.15);
+        background: linear-gradient(#39b54a, #1a8e2a);
+    }
+
+    &:disabled {
+        opacity: 0.75;
+        cursor: auto;
+    }
 }

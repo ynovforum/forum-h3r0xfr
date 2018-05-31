@@ -111,7 +111,7 @@
                 margin-right: 20px;
             }
 
-            .question-title{
+            .question-title {
                 width: 60%;
 
                 .question-author {
@@ -130,6 +130,33 @@
         .question-content {
             img {
                 max-width: 100%;
+            }
+        }
+
+        .comment {
+            display: flex;
+
+            &:not(:last-child) {
+                margin-bottom: 25px;
+            }
+
+            img {
+                width: 62px;
+                margin-right: 20px;
+            }
+
+            .comment-author {
+                width: 60%;
+
+                .comment-content {
+                    color: #7c8ca5;
+                    font-size: 14px;
+                    margin-top: 5px;
+                }
+            }
+
+            .action-right {
+                width: 31%;
             }
         }
     }
@@ -174,6 +201,10 @@
     margin: 20px auto auto;
     width: 80%;
 
+    @media (max-width: 1000px) {
+        width: 90%;
+    }
+
     .alert {
         color: white;
         padding: 10px;
@@ -205,10 +236,5 @@
     i {
         margin-left: 10px;
         cursor: pointer;
-    }
-
-    .resolved {
-        padding-right: 10px;
-        border-right: 1px solid lightgray;
     }
 }

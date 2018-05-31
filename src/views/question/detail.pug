@@ -10,7 +10,6 @@ div.content
                         span.question-author #{question.User.name} | #{moment(question.createdAt).fromNow()}
                     if user && (question.User.id == user.id || user.role == 'admin')
                         span.action-right
-                            i.material-icons.resolved check
                             i.material-icons.edit edit
                             i.material-icons.delete delete
                 
@@ -23,7 +22,12 @@ div.content
                     p #{question.Comments.length} réponses
                     hr
                     each comment in question.Comments
-                        p [#{comment.User.name}] #{comment.title} : #{comment.content} 
+                        
+                        div.comment
+                            img(src='/assets/img/avatar.jpg').avatar
+                            div.comment-author #{comment.User.name} | #{moment(comment.createdAt).fromNow()}
+                                div.comment-content !{comment.content}
+                            
                             if user && (comment.User.id == user.id || user.role == 'admin')
                                 span.action-right
                                     i.material-icons.edit edit
@@ -31,15 +35,30 @@ div.content
                                         i.material-icons.delete delete
 
 
-                if user
-                    hr
+                hr
+                if !user
+                    p Vous devez vous 
+                        a(href='/account/login') connecter 
+                        | pour répondre à cette question.
+                else if question.resolvedAt
+                    p Cette question a été marquée comme résolue.
+                else
                     h3 Ajouter une réponse
                     form(method='post')
-                        input(type='text', name='title', placeholder='Titre')
-                        input(type='text', name='content', placeholder='Contenu')
-                        button(type='submit').btn Envoyer
+                        textarea(name='content').tinycomment
+                        button(type='submit').btn.answer Envoyer la réponse
+                
                         
         div.container-4
+            if user && (question.User.id == user.id || user.role == 'admin')
+                div.container-12
+                    div.box
+                        h4 Votre problème est résolu ?
+                        p Marquez-le comme résolu pour indiquer que vous avez résolu votre problème. Vous ne pourrez plus recevoir de réponses à cette question.
+                        button(type='button').btn.resolved
+                            i.material-icons check_circle
+                            | Marquer comme résolu
+                            
             div.container-12
                 div.box.secondary
                     h4 
@@ -55,9 +74,6 @@ div.content
                     hr
                     div.secondary-footer
                         a(href='#') Still need help? Contact Support
-            div.container-12
-                div.box
-                    p Test
 
 include ../inc/foot.pug
 script(src='/assets/js/question/main.js')

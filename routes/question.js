@@ -37,7 +37,9 @@ module.exports = (needAuth) => {
             res.render('question/detail', {
                 title: question.title,
                 question: question,
-                user: req.user
+                user: req.user,
+                errorMessage: req.flash('errorMessage'),
+                successMessage: req.flash('successMessage')
             });
         });
     });
@@ -48,11 +50,11 @@ module.exports = (needAuth) => {
 
         form.parse(req, (err, fields, files) => {
             models.Comment.create({
-                title: fields.title,
                 content: fields.content,
                 QuestionId: req.params.id,
                 UserId: req.user.id
             }).then((comment) => {
+                req.flash('successMessage', 'Votre commentaire a été ajouté.');
                 res.redirect('back');
             });
         });
