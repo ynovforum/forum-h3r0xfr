@@ -8,13 +8,14 @@ div.content
                     img(src='/assets/img/avatar.jpg').avatar
                     h2.question-title #{question.title}
                         span.question-author #{question.User.name} | #{moment(question.createdAt).fromNow()}
-                    span.action-right
+                    span.action-right.question-right
                         if question.resolvedAt
                             i.material-icons.resolved-icon check_circle
                             | Résolue (#{moment(question.resolvedAt).fromNow()})
                         else if user && (question.User.id == user.id || user.role == 'admin')
                             i.material-icons.edit edit
-                            i.material-icons.delete delete
+                            a(href='/q/' + question.id + '/delete').nostyle
+                                i.material-icons.delete delete
                 
                 if user && (question.User.id == user.id || user.role == 'admin')
                     input(type='text', value=question.title, placeholder='Titre')#editTitle
@@ -34,7 +35,7 @@ div.content
                                 if user && (comment.User.id == user.id || user.role == 'admin') && !question.resolvedAt
                                     span.action-right
                                         i.material-icons.edit edit
-                                        a(href='/q/comment/' + comment.id + '/delete')
+                                        a(href='/q/comment/' + comment.id + '/delete').nostyle
                                             i.material-icons.delete delete
 
 

@@ -7,14 +7,27 @@ module.exports = (needAuth, noAuth) => {
 
     require('../config/passport') (passport, bcrypt);
 
+    function checkUser(req, res) {
+        let id = req.params.id;
+
+        if(id) {
+            if(!req.isAuthenticated() || req.user.role != 'admin') {
+                req.flash('errorMessage', 'Vous n\'êtes pas autorisé à accéder à cette page.');
+                return res.redirect('/');
+            }
+        } else {
+            id = req.user.id;
+        }
+
+        return id;
+    }
+
     router.get('/:id(\\d+)*?', needAuth, (req, res) => {
-        let userId = req.params.id;
-        if(!userId) userId = req.user.id;
-        console.log('Selected user ID : ' + userId);
+        let userId = checkUser(req, res);
 
         models.User.findOne({
             where: { id: userId },
-            include: [models.Question, models.Comment]
+            include: [models.Question, { model: models.Comment, include: [models.Question] }]
         }).then((user) => {
             res.render('account/profile', {
                 title: 'Mon compte',
@@ -23,6 +36,22 @@ module.exports = (needAuth, noAuth) => {
                 successMessage: req.flash('successMessage'),
                 userData: user,
                 roles: models.User.rawAttributes.role.values
+            });
+        });
+    });
+
+    router.post('/:id(\\d+)*?', needAuth, (req, res) => {
+        let userId = checkUser(req, res);
+        let form = new formidable.IncomingForm();
+
+        form.parse(req, (err, fields, files) => {
+            const { name, email, role } = fields;
+
+            models.User.update({ name, email, role }, {
+                where: { id: userId }
+            }).then((user) => {
+                req.flash('successMessage', 'Les informations de compte ont été enregistrées.');
+                res.redirect('back');
             });
         });
     });

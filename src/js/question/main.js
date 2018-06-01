@@ -58,9 +58,12 @@ function editQuestion() {
     tinyReload();
 }
 
-function deleteQuestion() {
+function deleteQuestion(e) {
+    e.preventDefault();
     if(confirm('Voulez-vous vraiment supprimer la question ? Cette action est irréversible.')) {
-        alert('Question supprimée.');
+        const icon = $('.question-right .delete');
+        btnLoad($('.question-right'), 'Suppression de la question...');
+        window.location.replace(icon.parent().attr('href'));
     }
 }
 

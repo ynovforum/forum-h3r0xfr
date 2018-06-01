@@ -3,16 +3,40 @@ include inc/head.pug
 div.content
     div.container
         div.container-4
-            div.box
+            p.notop Menu
                 
         div.container-8
+            h2.notop Dernières questions
+            div.row
+                div.container-6
+                    div.box
+                        p.light Dernière
+                        
+                div.container-6
+                    div.box
+                        p.light Avant-dernière
+            
             div.box
-                h2 Liste des questions
+                h2 Questions (#{questions.length})
+                hr
 
-                if questions.length
-                    each question in questions
-                        div
+                each question in questions
+                    div.row
+                        div.container-4
                             a(href='/q/' + question.id + '-' + question.urlname) #{question.title}
+                        div.container-3
+                            p.light #{moment(question.createdAt).fromNow()}
+                        div.container-3
+                            if question.Comments.length == 0
+                                p.light.bold aucune réponse
+                            else
+                                p.light #{question.Comments.length} réponse(s)
+                        div.container-2
+                            if question.resolvedAt
+                                span.badge.success Résolue
+                            else
+                                span.badge.error Non résolue
+                    hr
                 else
                     p Aucune question
     

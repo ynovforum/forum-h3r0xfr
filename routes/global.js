@@ -3,7 +3,7 @@ const models  = require('../models');
 
 router.get('/', (req, res) => {
     models.Question.findAll({
-        include: [ models.User ]
+        include: [ models.User, models.Comment ]
     }).then(function(questions) {
         res.render('home', {
             title: 'Liste des questions',

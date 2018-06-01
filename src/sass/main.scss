@@ -69,6 +69,7 @@
 
 .content {
     margin-bottom: 40px;
+    margin-right: -20px;
     padding-top: 20px;
 
     .box {
@@ -237,7 +238,7 @@
     .alert {
         color: white;
         padding: 10px;
-        margin: 10px 20px 0 20px;
+        margin: 10px 2px 0;
         border-radius: 5px;
 
         &.error {
@@ -256,6 +257,20 @@
                 margin-right: 5px;
             }
         }
+    }
+}
+
+.badge {
+    padding: 3px 5px;
+    border-radius: 4px;
+    color: white;
+
+    &.error {
+        background-color: lightcoral;
+    }
+
+    &.success {
+        background-color: #6ecc6e;
     }
 }
 

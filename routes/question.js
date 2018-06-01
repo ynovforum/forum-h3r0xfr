@@ -55,8 +55,17 @@ module.exports = (needAuth) => {
         }, {
             where: { id: req.params.id }
         }).then((question) => {
-            req.flash('successMessage', 'Votre question a été marquée comme résolue.');
+            req.flash('successMessage', 'La question a été marquée comme résolue.');
             res.redirect('back');
+        });
+    });
+
+    router.get('/:id/delete', (req, res) => {
+        models.Question.destroy({
+            where: { id: req.params.id }
+        }).then(() => {
+            req.flash('successMessage', 'La question a été supprimée.');
+            res.redirect('/');
         });
     });
 
