@@ -11,7 +11,7 @@ div.content
                     span.action-right
                         if question.resolvedAt
                             i.material-icons.resolved-icon check_circle
-                            | Résolue
+                            | Résolue (#{moment(question.resolvedAt).fromNow()})
                         else if user && (question.User.id == user.id || user.role == 'admin')
                             i.material-icons.edit edit
                             i.material-icons.delete delete

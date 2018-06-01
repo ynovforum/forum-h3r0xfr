@@ -3,7 +3,6 @@
 body {
     margin: 0;
     background-color: #eff3f6;
-    /*background: url(https://cdn.discordapp.com/attachments/450559026338594827/451390550076293130/Question.png);*/
     font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -33,4 +32,9 @@ a {
     text-decoration: none;
     font-weight: bold;
     color: 00aaff;
+
+    &.nostyle {
+        font-weight: normal;
+        color: initial;
+    }
 }

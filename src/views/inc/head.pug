@@ -12,17 +12,24 @@ html
         div.navbar
             div.left-menu
                 a(href='/') Liste des question
-                a(href='/q/create') Créer une question
+                a(href='/q/publish') Publier une question
+                
+                if user && user.role == 'admin'
+                    a(href='/admin') Administration
+            
+            div.right-menu
                 if user
-                    a(href='/account') Mon compte (#{user.name})
-                    a(href='/account/logout') Déconnexion
+                    a(href='/account') #{user.name}
                 else
                     a(href='/account/login') Connexion
                     a(href='/account/signup') Créer un compte
-            
-            div.right-menu
+                
                 a(href='/account')
                     img(src='/assets/img/avatar.jpg').avatar
+                    
+                if user
+                    a(href='/account/logout')
+                        i.material-icons power_settings_new
                 
         div.title
             p
@@ -30,7 +37,13 @@ html
                     | Question ##{question.id}
                 else
                     | #{title}
-                span Automatically saved
+                
+                span
+                    if info
+                        i.material-icons info
+                        | #{info}
+                    else
+                        | Les informations relatives à la page s'affichent ici
                 
         div.notification
             if errorMessage && errorMessage.length

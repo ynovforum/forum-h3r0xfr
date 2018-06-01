@@ -2,9 +2,42 @@ include ../inc/head.pug
 
 div.content
     div.container
-        div.container-full
-            div.box
-                h2 #{user.name}
-                p #{user.email}
+        div.container-12.box
+            h4 Modifier mon profil
+            form(method='post')
+                label Nom
+                input(type='text', value=userData.name)
+                
+                label Adresse e-mail
+                input(type='email', value=userData.email)
+                    
+                label Rôle
+                select(name='role', value=userData.role)
+                    each role in roles
+                        option(value=role) #{role}
+                    
+                button(type='submit').btn Modifier le profil
+                    
+    div.container
+        div.container-6.box
+            h4 Question (#{userData.Questions.length})
+            each question in userData.Questions
+                ul
+                    li
+                        a(href='/q/' + question.id + '-' + question.urlname, target='_blank') #{question.title}
+            else
+                p Vous n'avez publié aucune question. 
+                    a(href='/q/publish') Publiez-en une maintenant
+                    | .
+                    
+        div.container-6.box
+            h4 Réponses (#{userData.Comments.length})
+            
+            each comment in userData.Comments
+                ul
+                    li ##{comment.id} postée #{moment(comment.createdAt).fromNow()} dans 
+                        a(href='/q/' + comment.QuestionId) #{comment.QuestionId}
+            else
+                p Vous n'avez posté aucune réponse.
 
 include ../inc/foot.pug

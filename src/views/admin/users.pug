@@ -1,0 +1,25 @@
+include ../inc/head.pug
+
+div.content
+    div.container
+        div.container-12
+        
+            each userItem in users
+                a(href='/account/' + userItem.id).nostyle
+                    div.box.box-row
+                        div.row
+                            div.container-1
+                                img(src='/assets/img/avatar.jpg').avatar
+                            div.container-2
+                                p #{userItem.name}
+                            div.container-3
+                                p #{userItem.email}
+                            div.container-2
+                                p #{userItem.role}
+                            div.container-2
+                                p #{userItem.Questions.length} questions
+                            div.container-2
+                                p #{userItem.Comments.length} commentaires
+
+include ../inc/foot.pug
+script(src='/assets/js/admin/main.js')

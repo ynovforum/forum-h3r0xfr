@@ -1,0 +1,17 @@
+include ../inc/head.pug
+
+div.content
+    div.container
+        div.container-12
+            div.box
+                form(method='post')
+                    label Question
+                    input(type='text', name='title', placeholder='Entrez votre question')
+                    
+                    label Description
+                    textarea(name='description')#newQuestion.tinyedit
+                    
+                    button(type='submit').btn.publish Publier
+
+include ../inc/foot.pug
+script(src='/assets/js/question/main.js')

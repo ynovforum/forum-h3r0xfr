@@ -4,19 +4,24 @@ module.exports = (needAuth) => {
     const formidable = require('formidable');
     const models = require('../models');
 
-    router.get('/create', needAuth, (req, res) => {
-        res.render('question/create', {
-            title: 'Créer une question',
+    router.get('/publish', needAuth, (req, res) => {
+        res.render('question/publish', {
+            title: 'Publier une question',
             user: req.user,
             errorMessage: req.flash('errorMessage'),
             successMessage: req.flash('successMessage')
         });
     });
 
-    router.post('/create', needAuth, (req, res) => {
+    router.post('/publish', needAuth, (req, res) => {
         let form = new formidable.IncomingForm();
 
         form.parse(req, (err, fields, files) => {
+            if(fields.title.replace(/\s/g, '').length < 1 || fields.description.length < 1) {
+                req.flash('errorMessage', 'Vous devez compléter tous les champs.');
+                return res.redirect('/q/publish');
+            }
+
             let urlname = slug(fields.title);
             models.Question.create({
                 title: fields.title,
@@ -46,7 +51,7 @@ module.exports = (needAuth) => {
 
     router.post('/:id/resolve', (req, res) => {
         models.Question.update({
-            resolvedAt: models.Sequelize.NOW
+            resolvedAt: models.sequelize.fn('NOW')
         }, {
             where: { id: req.params.id }
         }).then((question) => {

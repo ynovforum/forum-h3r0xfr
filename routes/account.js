@@ -7,12 +7,23 @@ module.exports = (needAuth, noAuth) => {
 
     require('../config/passport') (passport, bcrypt);
 
-    router.get('/', needAuth, (req, res) => {
-        res.render('account/profile', {
-            title: 'Mon compte',
-            user: req.user,
-            errorMessage: req.flash('errorMessage'),
-            successMessage: req.flash('successMessage')
+    router.get('/:id(\\d+)*?', needAuth, (req, res) => {
+        let userId = req.params.id;
+        if(!userId) userId = req.user.id;
+        console.log('Selected user ID : ' + userId);
+
+        models.User.findOne({
+            where: { id: userId },
+            include: [models.Question, models.Comment]
+        }).then((user) => {
+            res.render('account/profile', {
+                title: 'Mon compte',
+                user: req.user,
+                errorMessage: req.flash('errorMessage'),
+                successMessage: req.flash('successMessage'),
+                userData: user,
+                roles: models.User.rawAttributes.role.values
+            });
         });
     });
 

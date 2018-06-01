@@ -9,6 +9,8 @@ $('.question-content a, .comment-content a').each((i, el) => {
 
 $('.box .resolved').on('click', resolvedQuestion);
 $('.box .answer').on('click', answerQuestion);
+$('.box .publish').on('click', publishQuestion);
+
 $('.question-header .edit').on('click', editQuestion);
 $('.question-header .delete').on('click', deleteQuestion);
 
@@ -32,8 +34,7 @@ function resolvedQuestion() {
     }
 }
 
-function answerQuestion(e) {
-    e.preventDefault();
+function answerQuestion() {
     if(tinymce.get('newComment').getContent().length < 1) {
         alert('Vous devez entrer une réponse.');
     } else {
@@ -41,6 +42,12 @@ function answerQuestion(e) {
         btnLoad(btn, 'Envoi de la réponse...');
         btn.parent('form').submit();
     }
+}
+
+function publishQuestion() {
+    const btn = $('.box .publish');
+    btnLoad(btn, 'Publication de la question...');
+    btn.parent('form').submit();
 }
 
 function editQuestion() {

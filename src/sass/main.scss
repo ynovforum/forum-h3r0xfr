@@ -8,7 +8,7 @@
     width: 100%;
 
     .left-menu {
-        width: 70%;
+        width: 50%;
         padding: 20px;
 
         a {
@@ -26,14 +26,24 @@
     }
 
     .right-menu {
-        width: 30%;
+        width: 50%;
         padding: 20px;
         text-align: right;
+
+        a {
+            color: white;
+            margin-left: 20px;
+        }
+
+        i.material-icons {
+            color: lightcoral;
+        }
 
         img {
             width: 45px;
             height: initial;
             margin-top: -10px;
+            vertical-align: text-top;
         }
     }
 }
@@ -66,7 +76,7 @@
         border-radius: 4px;
         border: 1px solid lightgray;
         padding: 20px;
-        margin: 0 20px;
+        margin: 0 20px 20px 0;
 
         &.secondary {
             background-color: #fafbfc;
@@ -179,6 +189,14 @@
                 width: 15%;
             }
         }
+
+        &.box-row {
+            transition: .2s ease-in-out;
+
+            &:hover {
+                background-color: #e4e4e4;
+            }
+        }
     }
 
     .container {
@@ -186,22 +204,9 @@
         width: 80%;
         margin: auto;
 
-        .container-left {
-            width: 40%;
-        }
-
-        .container-right {
-            width: 60%;
-        }
-
-        .container-full {
-            width: 100%;
-        }
-
         @for $i from 1 through 12 {
             .container-#{$i} {
                 width: (100% / 12) * $i;
-                margin-bottom: 20px;
             }
         }
 
@@ -213,7 +218,11 @@
                 width: 100%;
             }
         }
+    }
 
+    .row {
+        display: flex;
+        width: 100%;
     }
 }
 

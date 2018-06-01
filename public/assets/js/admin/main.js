@@ -1,0 +1,1 @@
+$(".box-row").each((o,r)=>{let t="#"+("000000"+Math.floor(16777215*Math.random()).toString(16)).slice(-6);$(r).css("border-left","4px solid "+t)});
