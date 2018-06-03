@@ -1,6 +1,10 @@
 const actionBar = $('.question-header .action-right');
 const actionsBase = actionBar.html();
 
+let modal = $('#editModal');
+let span = $('.close');
+span.click(() => { modal.hide(); });
+
 // Ouvrir tous les liens dans le contenu de la question et des commentaires dans un nouvel onglet
 $('.question-content a, .comment-content a').each((i, el) => {
     $(el).attr('target', '_blank');
@@ -13,6 +17,9 @@ $('.box .publish').on('click', publishQuestion);
 $('.question-header .edit').on('click', editQuestion);
 $('.question-header .delete').on('click', deleteQuestion);
 $('#editButton').on('click', saveEditQuestion);
+
+$('.comment .edit').on('click', editComment);
+$('.comment .delete').on('click', deleteComment);
 
 function btnLoad(element, message) {
     element.html('<i class="material-icons material-spin">refresh</i>' + message).attr('disabled', true);
@@ -55,9 +62,20 @@ function editQuestion() {
 
 function saveEditQuestion() {
     const btn = $('#editButton');
+    btnLoad(btn, 'Enregistrement en cours...');
     $('#editTitleField').val($('#editTitle').val());
     $('#editDescriptionField').val(tinymce.get('editDescription').getContent());
     btn.parent('form').submit();
+}
+
+function editComment() {
+    let id = $(this).data('id');
+
+    $('#editCommentId').val(id);
+    $('#editCommentContent').html($('#commentContent-' + id).html());
+    tinyReload();
+
+    modal.show();
 }
 
 function deleteQuestion(e) {
@@ -67,6 +85,13 @@ function deleteQuestion(e) {
         btnLoad($('.question-right'), 'Suppression de la question...');
         window.location.replace(icon.parent().attr('href'));
     }
+}
+
+function deleteComment(e) {
+    e.preventDefault();
+    const icon = $(this);
+    btnLoad(icon.parent().parent(), 'Suppression...');
+    window.location.replace(icon.parent().attr('href'));
 }
 
 function tinyReload() {

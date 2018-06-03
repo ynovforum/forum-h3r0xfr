@@ -79,7 +79,7 @@ module.exports = (needAuth) => {
             models.Question.update({ title, description }, {
                 where: { id: req.params.id }
             }).then((question) => {
-                req.flash('successMessage', 'Les modifications ont été effectuées.');
+                req.flash('successMessage', 'Les modifications ont été enregistrées.');
                 res.redirect('back');
             });
         });
