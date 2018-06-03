@@ -1,6 +1,5 @@
 const actionBar = $('.question-header .action-right');
 const actionsBase = actionBar.html();
-//const savedContent = [];
 
 // Ouvrir tous les liens dans le contenu de la question et des commentaires dans un nouvel onglet
 $('.question-content a, .comment-content a').each((i, el) => {
@@ -15,14 +14,8 @@ $('.question-header .edit').on('click', editQuestion);
 $('.question-header .delete').on('click', deleteQuestion);
 
 function btnLoad(element, message) {
-    /*savedContent.push(element);
-    savedContent[element] = element.html();*/
     element.html('<i class="material-icons material-spin">refresh</i>' + message).attr('disabled', true);
 }
-
-/*function btnReset(element) {
-    element.html(savedContent[element]).attr('disabled', false);
-}*/
 
 function resolvedQuestion() {
     if(confirm('Voulez-vous vraiment marquer cette question comme résolue ?')) {

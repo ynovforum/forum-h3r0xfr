@@ -5,7 +5,7 @@ div.content
         div.container-8
             div.box
                 div.question-header
-                    img(src='/assets/img/avatar.jpg').avatar
+                    img(src='/assets/img/avatars/' + question.User.avatar).avatar
                     h2.question-title #{question.title}
                         span.question-author #{question.User.name} | #{moment(question.createdAt).fromNow()}
                     span.action-right.question-right
@@ -28,7 +28,7 @@ div.content
                     div.comments
                         each comment in question.Comments
                             div.comment
-                                img(src='/assets/img/avatar.jpg').avatar
+                                img(src='/assets/img/avatars/' + comment.User.avatar).avatar
                                 div.comment-author #{comment.User.name} | #{moment(comment.createdAt).fromNow()}
                                     div.comment-content !{comment.content}
                                 

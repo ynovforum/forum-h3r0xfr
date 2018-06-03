@@ -41,7 +41,18 @@ body {
 
 .avatar {
     border-radius: 50px;
+    width: 60px;
     height: 60px;
+
+    &.profile {
+        width: 100px;
+        height: 100px;
+        transition: .2s ease-in-out;
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
 }
 
 a {

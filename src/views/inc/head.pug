@@ -20,16 +20,15 @@ html
             div.right-menu
                 if user
                     a(href='/account') #{user.name}
+                    
+                    a(href='/account')
+                        img(src='/assets/img/avatars/' + user.avatar).avatar
+                        
+                    a(href='/account/logout')
+                        i.material-icons power_settings_new
                 else
                     a(href='/account/login') Connexion
                     a(href='/account/signup') Créer un compte
-                
-                a(href='/account')
-                    img(src='/assets/img/avatar.jpg').avatar
-                    
-                if user
-                    a(href='/account/logout')
-                        i.material-icons power_settings_new
                 
         div.title
             p
@@ -50,10 +49,10 @@ html
                 div.alert.error
                     p
                         i.material-icons warning
-                        | #{errorMessage}
+                        | !{errorMessage}
                         
             if successMessage && successMessage.length
                 div.alert.success
                     p 
                         i.material-icons check
-                        | #{successMessage}
+                        | !{successMessage}

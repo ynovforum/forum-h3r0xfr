@@ -1,9 +1,19 @@
+form {
+    #avatar {
+        display: none;
+    }
+}
+
 label {
     display: block;
     margin-bottom: 5px;
     font-size: 14px;
     font-weight: bold;
     color: #7f8fa4;
+
+    .avatar {
+        cursor: pointer;
+    }
 }
 
 input {
@@ -31,6 +41,7 @@ select {
     font-size: 12px;
     font-weight: bold;
     background-color: #f8fafc;
+    margin-bottom: 15px;
 }
 
 .btn {

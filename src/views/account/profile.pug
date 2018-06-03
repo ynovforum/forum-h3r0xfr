@@ -2,25 +2,47 @@ include ../inc/head.pug
 
 div.content
     div.container
-        div.container-12
+        div.container-8
             div.box
                 h4 Modifier le profil
-                form(method='post')
-                    label Nom
-                    input(type='text', name='name', value=userData.name)
+                form(method='post', enctype='multipart/form-data')
                     
-                    label Adresse e-mail
-                    input(type='email', name='email', value=userData.email)
+                    div.row
+                        div.container-2.center
+                            label Avatar
+                            
+                            label(for='avatar')
+                                img(src='/assets/img/avatars/' + userData.avatar).avatar.profile
+                            p.light PNG, JPG, GIF
+                            input(type='file', id='avatar', name='avatar', onchange="preview(this);")
+                                
+                        div.container-1
                         
-                    label Rôle
-                    select(name='role', value=userData.role)
-                        each role in roles
-                            if role == userData.role
-                                option(value=role, selected) #{role}
-                            else
-                                option(value=role) #{role}
+                        div.container-9
+                            label Nom
+                            input(type='text', name='name', value=userData.name, required)
+                            
+                            label Adresse e-mail
+                            input(type='email', name='email', value=userData.email, required)
+                    
+                    if user.role == 'admin'
+                        label Rôle
+                        select(name='role', value=userData.role)
+                            each role in roles
+                                if role == userData.role
+                                    option(value=role, selected) #{role}
+                                else
+                                    option(value=role) #{role}
+                                
+                    label Bio
+                    textarea(name='bio').tinyedit !{userData.bio}
                         
                     button(type='submit').btn Modifier le profil
+        
+        div.container-4
+            div.box
+                h4 Activité
+                p Aucune activité
                     
     div.container
         div.container-6
@@ -50,3 +72,4 @@ div.content
                     p Aucune réponse publiée.
 
 include ../inc/foot.pug
+script(src='/assets/js/account/profile.js')

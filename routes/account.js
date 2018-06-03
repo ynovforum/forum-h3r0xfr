@@ -1,5 +1,6 @@
 module.exports = (needAuth, noAuth) => {
     const router = require('express').Router();
+    const fs = require('fs');
     const passport = require('passport');
     const bcrypt = require('bcrypt');
     const formidable = require('formidable');
@@ -45,13 +46,46 @@ module.exports = (needAuth, noAuth) => {
         let form = new formidable.IncomingForm();
 
         form.parse(req, (err, fields, files) => {
-            const { name, email, role } = fields;
+            let { name, email, role, bio } = fields;
 
-            models.User.update({ name, email, role }, {
-                where: { id: userId }
-            }).then((user) => {
-                req.flash('successMessage', 'Les informations de compte ont été enregistrées.');
-                res.redirect('back');
+            models.User.findOne({ where: { id: userId } }).then((user) => {
+                let uAvatar = { name: user.avatar };
+
+                if(files.avatar.size !== 0 && files.avatar.name.length > 0) {
+                    console.log(files.avatar);
+                    uAvatar = files.avatar;
+
+                    uAvatar.name = Date.now() + '_' + uAvatar.name;
+                    uAvatar.name.replace(/ /g, '_');
+
+                    let oldpath = uAvatar.path;
+                    let newpath = './public/assets/img/avatars/' + uAvatar.name;
+
+                    if(req.user.role != 'admin' && role != 'user')
+                        role = 'user';
+
+                    if(!uAvatar.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
+                        req.flash('errorMessage', 'Les extensions acceptées pour l\'avatar sont : jpg, jpeg, png, gif');
+                        return res.redirect('back');
+                    }
+
+                    fs.rename(oldpath, newpath, (err) => {
+                        if (err) {
+                            console.log(err);
+                            req.flash('errorMessage', 'Une erreur est survenue lors de l\'envoi du fichier.');
+                            return res.redirect('back');
+                        }
+                    });
+
+                    if(user.avatar != 'default.jpg') {
+                        fs.unlink('./public/assets/img/avatars/' + user.avatar);
+                    }
+                }
+
+                user.update({ name, email, role, bio, avatar: uAvatar.name }).then((user) => {
+                    req.flash('successMessage', 'Les informations de compte ont été enregistrées.');
+                    res.redirect('back');
+                });
             });
         });
     });
@@ -109,7 +143,16 @@ module.exports = (needAuth, noAuth) => {
                     models.User
                         .create({ name, email, password: hash })
                         .then((user) => {
-                            req.login(user, () => res.redirect('/'));
+                            models.User.count().then((count) => {
+                                if(count == 1) {
+                                    user.update({ role: 'admin' });
+                                    req.flash('successMessage', 'Votre compte a été créé avec succès. Le rôle d\'administrateur vous a été assigné (premier utilisateur inscrit).');
+                                } else {
+                                    req.flash('successMessage', 'Votre compte a été créé avec succès. Modifiez maintenant votre avatar et votre bio dans votre <a href="/account">profil</a>.');
+                                }
+
+                                req.login(user, () => res.redirect('/'));
+                            });
                         });
                 });
         });

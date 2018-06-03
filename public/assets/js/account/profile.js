@@ -1,0 +1,1 @@
+function preview(e){if(e.files&&e.files[0]){let a=new FileReader;a.onload=(e=>{$(".avatar.profile").attr("src",e.target.result)}),a.readAsDataURL(e.files[0])}}

@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         email: DataTypes.STRING,
         password: DataTypes.STRING,
         bio: DataTypes.TEXT,
+        avatar: { type: DataTypes.STRING, defaultValue: 'default.jpg' },
         role: { type: DataTypes.ENUM, values: ['user', 'admin'], defaultValue: 'user' }
     });
 
