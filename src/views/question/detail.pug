@@ -16,9 +16,17 @@ div.content
                             i.material-icons.edit edit
                             a(href='/q/' + question.id + '/delete').nostyle
                                 i.material-icons.delete delete
+                    span(style='display:none').action-right.question-right#edit
+                        | En cours d'édition...
+                        form(method='post', action='/q/' + question.id + '/edit')
+                            input#editTitleField(type='hidden', name='title', value='')
+                            input#editDescriptionField(type='hidden', name='description', value='')
+                            button#editButton(type='submit').btn.small
+                                i.material-icons check
+                                | Enregistrer
                 
                 if user && (question.User.id == user.id || user.role == 'admin')
-                    input(type='text', value=question.title, placeholder='Titre')#editTitle
+                    input(type='text', name='title', value=question.title, placeholder='Titre')#editTitle
                 
                 div.question-content !{question.description}
 

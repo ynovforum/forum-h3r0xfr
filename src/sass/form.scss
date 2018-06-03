@@ -56,6 +56,25 @@ select {
     transition: .2s ease-in-out;
     outline: none;
 
+    &.small {
+        width: initial;
+        padding: 5px;
+        font-size: 12px;
+
+        i {
+            margin-left: 0;
+            font-size: 21px;
+        }
+    }
+
+    &.cancel {
+        background: linear-gradient(#f08080, #f37171);
+
+        &:hover:not(:disabled) {
+            background: linear-gradient(#f08080, #ef4a4a);
+        }
+    }
+
     &:hover:not(:disabled) {
         box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.5), 0 0px 15px 0 rgba(0, 0, 0, 0.15);
         background: linear-gradient(#39b54a, #1a8e2a);

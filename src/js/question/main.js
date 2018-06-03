@@ -12,6 +12,7 @@ $('.box .publish').on('click', publishQuestion);
 
 $('.question-header .edit').on('click', editQuestion);
 $('.question-header .delete').on('click', deleteQuestion);
+$('#editButton').on('click', saveEditQuestion);
 
 function btnLoad(element, message) {
     element.html('<i class="material-icons material-spin">refresh</i>' + message).attr('disabled', true);
@@ -45,10 +46,18 @@ function publishQuestion() {
 
 function editQuestion() {
     const oldContent = $('.question-content').html();
-    actionBar.html('En cours d\'édition');
+    $('.question-right').hide();
+    $('#edit').show();
     $('#editTitle').show();
-    $('.question-content').html('<textarea class="tinyedit">' + oldContent + '</textarea>');
+    $('.question-content').html('<textarea id="editDescription" class="tinyedit">' + oldContent + '</textarea>');
     tinyReload();
+}
+
+function saveEditQuestion() {
+    const btn = $('#editButton');
+    $('#editTitleField').val($('#editTitle').val());
+    $('#editDescriptionField').val(tinymce.get('editDescription').getContent());
+    btn.parent('form').submit();
 }
 
 function deleteQuestion(e) {

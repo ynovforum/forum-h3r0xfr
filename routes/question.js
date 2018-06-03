@@ -69,6 +69,22 @@ module.exports = (needAuth) => {
         });
     });
 
+    router.post('/:id/edit', (req, res) => {
+        let form = new formidable.IncomingForm();
+
+        form.parse(req, (err, fields, files) => {
+            const { title, description } = fields;
+            console.log(fields);
+
+            models.Question.update({ title, description }, {
+                where: { id: req.params.id }
+            }).then((question) => {
+                req.flash('successMessage', 'Les modifications ont été effectuées.');
+                res.redirect('back');
+            });
+        });
+    });
+
     // Comments
     router.post('/:id-:urlname', needAuth, (req, res) => {
         let form = new formidable.IncomingForm();
