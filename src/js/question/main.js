@@ -70,11 +70,8 @@ function saveEditQuestion() {
 
 function editComment() {
     let id = $(this).data('id');
-
-    $('#editCommentId').val(id);
-    $('#editCommentContent').html($('#commentContent-' + id).html());
-    tinyReload();
-
+    $('#editForm').attr('action', '/q/comment/' + id + '/edit');
+    tinymce.get('editCommentContent').setContent($('#commentContent-' + id).html());
     modal.show();
 }
 

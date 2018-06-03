@@ -74,7 +74,6 @@ module.exports = (needAuth) => {
 
         form.parse(req, (err, fields, files) => {
             const { title, description } = fields;
-            console.log(fields);
 
             models.Question.update({ title, description }, {
                 where: { id: req.params.id }
@@ -108,6 +107,21 @@ module.exports = (needAuth) => {
             comment.destroy();
             req.flash('successMessage', 'Votre commentaire a été supprimé.');
             res.redirect('back');
+        });
+    });
+
+    router.post('/comment/:id/edit', needAuth, (req, res) => {
+        let form = new formidable.IncomingForm();
+
+        form.parse(req, (err, fields, files) => {
+            const { content } = fields;
+
+            models.Comment.update({ content }, {
+                where: { id: req.params.id }
+            }).then((comment) => {
+                req.flash('successMessage', 'Le commentaire a été enregistré.');
+                res.redirect('back');
+            });
         });
     });
 
