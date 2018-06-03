@@ -2,10 +2,10 @@ include inc/head.pug
 
 div.content
     div.container
-        div.container-4
+        div.container-2
             p.notop Menu
                 
-        div.container-8
+        div.container-10
             h2.notop Dernières questions
             div.row
                 div.container-6
@@ -24,9 +24,11 @@ div.content
                     div.row
                         div.container-4
                             a(href='/q/' + question.id + '-' + question.urlname) #{question.title}
-                        div.container-3
+                        div.container-2
+                            p.light #{question.User.name}
+                        div.container-2
                             p.light #{moment(question.createdAt).fromNow()}
-                        div.container-3
+                        div.container-2
                             if question.Comments.length == 0
                                 p.light.bold aucune réponse
                             else
